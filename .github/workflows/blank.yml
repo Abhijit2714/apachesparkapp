@@ -13,16 +13,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Copy code from custom folder
-        run: cp -r app/* .
+      - name: Copy code from custom folders
+        run: |
+          find . -maxdepth 2 -type d -name "source_code_folder*" -exec cp -r {}/* . \;
 
       - name: Build and test Apache Spark application
         run: |
           # Add commands to build and test the Spark application
+          echo "Building and testing Spark application..."
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      # Add steps to deploy the application using ArgoCD
+      - name: Deploy application using ArgoCD
+        run: |
+          # Add steps to deploy the application using ArgoCD
+          echo "Deploying application using ArgoCD..."
