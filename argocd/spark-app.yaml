@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: spark-app
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: .
+    repoURL: <your-github-repo-url>
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
